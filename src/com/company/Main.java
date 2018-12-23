@@ -1,7 +1,6 @@
 package com.company;
 
 public class Main {
-
     public static void main(String[] args) {
         Nota[] notasDoMauricio = {
                 new Nota("andre", 4),
@@ -18,14 +17,14 @@ public class Main {
                 new Nota("ana", 10)
         };
 
-        Nota[] rank = junta(notasDoMauricio, notasDoAlberto);
+        Nota[] rank = intercala(notasDoMauricio, notasDoAlberto);
 
         for(Nota nota : rank) {
             System.out.println(nota.getAluno());
         }
     }
 
-    private static Nota[] junta(Nota[] notas01, Nota[] notas02) {
+    private static Nota[] intercala(Nota[] notas01, Nota[] notas02) {
         int total = notas01.length + notas02.length;
         Nota[] resultado = new Nota[total];
 

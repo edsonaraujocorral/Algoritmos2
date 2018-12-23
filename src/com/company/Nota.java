@@ -12,7 +12,6 @@ public class Nota {
     public String getAluno() {
         return this.aluno;
     }
-
     public double getValor() {
         return this.valor;
     }
