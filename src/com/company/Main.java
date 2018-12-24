@@ -15,7 +15,7 @@ public class Main {
                 new Nota("ana", 10)
         };
 
-        Nota[] rank = intercala(notas, 0, 4, notas.length);
+        Nota[] rank = intercala(notas, 1, 4,notas.length);
 
         for(Nota nota : rank) {
             System.out.println(nota.getValor());
@@ -24,7 +24,7 @@ public class Main {
     }
 
     public static Nota[] intercala(Nota[] notas, int inicial, int miolo, int termino) {
-        Nota[] resultado = new Nota[notas.length];
+        Nota[] resultado = new Nota[notas.length - inicial];
 
         int atual = 0;
         int atual01 = inicial;
@@ -55,7 +55,11 @@ public class Main {
             atual++;
         }
 
-        return resultado;
+        for(int i = 0; i < atual; i++) {
+            notas[inicial + i] = resultado[i];
+        }
+
+        return notas;
     }
 
 }
