@@ -4,26 +4,34 @@ public class Main {
     public static void main(String[] args) {
 
         Nota[] notas = {
-                new Nota("andre", 4),
-                new Nota("mariana", 5),
-                new Nota("carlos", 8.5),
-                new Nota("paulo", 9),
-                new Nota("jonas", 3),
-                new Nota("juliana", 6.7),
-                new Nota("guilherme", 7),
-                new Nota("lucia", 9.3),
-                new Nota("ana", 10)
+                new Nota("andre", 4),   //0
+                new Nota("lucia", 9.3), //1
+                new Nota("paulo", 9),   //2
+                new Nota("mariana", 5), //3
+                new Nota("carlos", 8.5),//4
+                new Nota("jonas", 3),   //5
+                new Nota("guilherme", 7),//6
+                new Nota("juliana", 6.7),//7
+                new Nota("ana", 10)      //8
         };
-
-        Nota[] rank = intercala(notas, 1, 4,notas.length);
-
-        for(Nota nota : rank) {
+        ordena(notas, 0, notas.length);
+        for(Nota nota : notas) {
             System.out.println(nota.getValor());
         }
 
     }
 
-    public static Nota[] intercala(Nota[] notas, int inicial, int miolo, int termino) {
+    private static void ordena(Nota[] notas, int inicial, int termino) {
+        int quantidade = termino - inicial;
+        if(quantidade > 1) {
+            int meio = (inicial + termino) / 2;
+            ordena(notas, inicial, meio);
+            ordena(notas, meio, termino);
+            intercala(notas, inicial, meio, termino);
+        }
+    }
+
+    public static void intercala(Nota[] notas, int inicial, int miolo, int termino) {
         Nota[] resultado = new Nota[notas.length - inicial];
 
         int atual = 0;
@@ -59,7 +67,6 @@ public class Main {
             notas[inicial + i] = resultado[i];
         }
 
-        return notas;
     }
 
 }
