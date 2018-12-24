@@ -2,62 +2,60 @@ package com.company;
 
 public class Main {
     public static void main(String[] args) {
-        Nota[] notasDoMauricio = {
+
+        Nota[] notas = {
                 new Nota("andre", 4),
                 new Nota("mariana", 5),
                 new Nota("carlos", 8.5),
-                new Nota("paulo", 9)
-        };
-
-        Nota[] notasDoAlberto = {
+                new Nota("paulo", 9),
                 new Nota("jonas", 3),
                 new Nota("juliana", 6.7),
                 new Nota("guilherme", 7),
-                new Nota("lucia", 8.5),
+                new Nota("lucia", 9.3),
                 new Nota("ana", 10)
         };
 
-        Nota[] rank = intercala(notasDoMauricio, notasDoAlberto);
+        Nota[] rank = intercala(notas, 0, 4, notas.length);
 
         for(Nota nota : rank) {
-            System.out.println(nota.getAluno());
+            System.out.println(nota.getValor());
         }
+
     }
 
-    private static Nota[] intercala(Nota[] notas01, Nota[] notas02) {
-        int total = notas01.length + notas02.length;
-        Nota[] resultado = new Nota[total];
+    public static Nota[] intercala(Nota[] notas, int inicial, int miolo, int termino) {
+        Nota[] resultado = new Nota[notas.length];
 
-        int atual01 = 0;
-        int atual02 = 0;
         int atual = 0;
+        int atual01 = inicial;
+        int atual02 = miolo;
 
-        while(atual01 < notas01.length && atual02 < notas02.length) {
-
-            Nota nota01 = notas01[atual01];
-            Nota nota02 = notas02[atual02];
+        while(atual01 < miolo && atual02 < termino) {
+            Nota nota01 = notas[atual01];
+            Nota nota02 = notas[atual02];
 
             if(nota01.getValor() < nota02.getValor()) {
                 resultado[atual] = nota01;
                 atual01++;
-
             } else {
                 resultado[atual] = nota02;
                 atual02++;
-
             }
             atual++;
         }
-        while(atual01 < notas01.length) {
-            resultado[atual] = notas01[atual01];
+
+        while(atual01 < miolo) {
+            resultado[atual] = notas[atual01];
             atual01++;
             atual++;
         }
-        while(atual02 < notas02.length) {
-            resultado[atual] = notas02[atual02];
+        while(atual02 < termino) {
+            resultado[atual] = notas[atual02];
             atual02++;
             atual++;
         }
+
         return resultado;
     }
+
 }
