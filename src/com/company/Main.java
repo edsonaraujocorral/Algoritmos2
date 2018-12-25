@@ -10,24 +10,39 @@ public class Main {
                 new Nota("mariana", 5),
                 new Nota("carlos", 8.5),
                 new Nota("jonas", 3),
-                guilherme,
+                new Nota("ana", 10),
                 new Nota("juliana", 6.7),
-                new Nota("ana", 10)
+                guilherme
         };
+        quebraNoPivo(notas, 0, notas.length);
 
-        int quantidadeDeMenores = encontraMenores(guilherme, notas);
-        System.out.println("Numeros de Menores: " + quantidadeDeMenores);
+        for(int i = 0; i < notas.length; i++) {
+            Nota nota = notas[i];
+            System.out.println(nota.getAluno() + " " + nota.getValor());
+        }
+
     }
-
-    private static int encontraMenores(Nota guilherme, Nota[] notas) {
-        int menores = 0;
-        for(int atual = 0; atual < notas.length; atual++) {
-            Nota nota = notas[atual];
-            if(nota.getValor() < guilherme.getValor()) {
-               menores++;
+    private static void quebraNoPivo(Nota[] notas, int inicial, int termino) {
+        int menoresEncontrados = 0;
+        Nota pivo = notas[termino - 1];
+        for(int analisando = 0; analisando < termino - 1; analisando++) {
+            Nota atual = notas[analisando];
+            if(atual.getValor() <= pivo.getValor()) {
+                troca(notas, analisando, menoresEncontrados);
+                menoresEncontrados++;
             }
         }
 
-        return menores;
+        troca(notas, termino - 1, menoresEncontrados);
+
+
+    }
+
+    private static void troca(Nota[] notas, int de, int para) {
+        Nota nota1 = notas[de];
+        Nota nota2 = notas[para];
+
+        notas[de] = nota2;
+        notas[para] = nota1;
     }
 }
