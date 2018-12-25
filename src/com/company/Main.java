@@ -14,15 +14,25 @@ public class Main {
                 new Nota("juliana", 6.7),
                 guilherme
         };
-        quebraNoPivo(notas, 0, notas.length);
-
+        ordena(notas, 0, notas.length);
         for(int i = 0; i < notas.length; i++) {
             Nota nota = notas[i];
             System.out.println(nota.getAluno() + " " + nota.getValor());
         }
 
     }
-    private static void quebraNoPivo(Nota[] notas, int inicial, int termino) {
+
+    private static void ordena(Nota[] notas, int de, int ate) {
+        int elementos = ate - de;
+        if(elementos > 1) {
+            int posicaoDoPivo = particiona(notas, de, ate);
+            ordena(notas, de, posicaoDoPivo);
+            ordena(notas, posicaoDoPivo + 1, ate);
+        }
+
+    }
+
+    private static int particiona(Nota[] notas, int inicial, int termino) {
         int menoresEncontrados = 0;
         Nota pivo = notas[termino - 1];
         for(int analisando = 0; analisando < termino - 1; analisando++) {
@@ -32,16 +42,13 @@ public class Main {
                 menoresEncontrados++;
             }
         }
-
         troca(notas, termino - 1, menoresEncontrados);
 
-
+        return menoresEncontrados;
     }
-
     private static void troca(Nota[] notas, int de, int para) {
         Nota nota1 = notas[de];
         Nota nota2 = notas[para];
-
         notas[de] = nota2;
         notas[para] = nota1;
     }
